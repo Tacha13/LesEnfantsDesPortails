@@ -1,4 +1,10 @@
+#bibliothèque Composer (recréées avec composer install)
 /vendor/
-.env
-.vscode/
-Thumbs.db
+#données confidentielles
+.env 
+#paramétrage et exetnsion de mon VSC
+.vscode/ 
+#copie des images pour traitements rapides propres à windows local
+Thumbs.db 
+#fichier windows ne concerne pas le projet
+desktop.ini 
