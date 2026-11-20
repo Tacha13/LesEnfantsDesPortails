@@ -1,7 +1,8 @@
 #bibliothèque Composer (recréées avec composer install)
 /vendor/
-#données confidentielles
-.env 
+# Fichiers d'environnement (secrets), sauf le modèle
+.env*
+!.env.example
 #paramétrage et exetnsion de mon VSC
 .vscode/ 
 #copie des images pour traitements rapides propres à windows local
