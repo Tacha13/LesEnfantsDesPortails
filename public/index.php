@@ -1,0 +1,1 @@
+<?php echo "Bienvenue chez les Enfants des Portails";

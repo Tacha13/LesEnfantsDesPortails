@@ -1,0 +1,38 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8090:80"
+    volumes:
+      - ./:/var/www/html
+      - ./.env.docker:/var/www/html/.env
+    depends_on:
+      - db
+      - mongodb
+
+  db:
+    image: mariadb:10.11
+    env_file: .env.docker
+    volumes:
+      - db_data:/var/lib/mysql
+      #- ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      #- ./database/donnees.sql:/docker-entrypoint-initdb.d/02-donnees.sql
+  
+  mongodb:
+    image: mongo:8.0
+    env_file: .env.docker
+    volumes:
+      - mongo_data:/data/db
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - "8091:80"
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+
+volumes:
+  db_data:
+  mongo_data:
