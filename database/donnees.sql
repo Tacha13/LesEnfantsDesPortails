@@ -45,3 +45,14 @@ INSERT INTO concerner (livre_id, actu_id) VALUES
 (2,3),          -- actu 3 : tome 2 non validé
                 -- actu 4 : aucun livre
 (1,5), (7,5);   -- actu 5 : livres publiés mais actu inactive
+
+-- Images : 6 cas pour RG4
+-- (1 : sans livre / 2 : livre publié / 3 : tome futur
+--  4 : tome sans date / 5 : inactive / 6 : tome du jour)
+INSERT INTO image (fichier_img, categorie, image_active, credits, alt, legende, livre_id) VALUES
+('decor.jpg',        'ambiance',   1, 'Illustration : Yann',    'Décor',         'Décor',         NULL),
+('page-garde.jpg',   'couverture', 1, NULL,                     'Page de garde', 'Page de garde', 1),
+('perso1.jpg',       'portrait',   1, 'Illustration : Natacha', 'perso 1',       'perso 1',       3),
+('perso2.jpg',       'portrait',   1, NULL,                     'perso 2',       'perso 2',       5),
+('portail.jpg',      'actualite',  0, NULL,                     'portail',       'portail',       1),
+('couv-tome7.jpg',   'couverture', 1, NULL,                     'Couverture tome 7', 'Couverture tome 7', 7);

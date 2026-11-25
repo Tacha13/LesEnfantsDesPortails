@@ -50,3 +50,17 @@ WHERE a.actu_active = 1
              OR l.date_parution IS NULL
              OR l.valid_parution = 0)
   );
+
+-- T7 - RG4 : images visibles (active ET (sans livre OU livre publié))
+-- Attendu : images 1, 2 et 6 (Décor, Page de garde, Couverture tome 7)
+-- (3 : tome futur ; 4 : tome sans date ; 5 : inactive)
+SELECT id_image, fichier_img, livre_id
+FROM image
+WHERE image_active = 1
+  AND (livre_id IS NULL
+       OR livre_id IN (
+           SELECT id_livre
+           FROM livre
+           WHERE date_parution <= CURRENT_DATE
+             AND valid_parution = 1
+       ));
