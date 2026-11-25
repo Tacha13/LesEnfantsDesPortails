@@ -19,7 +19,8 @@ prix DECIMAL (10, 2),
 age_livre INTEGER NOT NULL,
 resume TEXT NOT NULL,
 date_parution DATE,
-valid_parution BOOLEAN DEFAULT 0 NOT NULL
+valid_parution BOOLEAN DEFAULT 0 NOT NULL,
+UNIQUE (nom_livre, format)
 );
 
 CREATE TABLE IF NOT EXISTS personnage
