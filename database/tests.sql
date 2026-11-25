@@ -64,3 +64,7 @@ WHERE image_active = 1
            WHERE date_parution <= CURRENT_DATE
              AND valid_parution = 1
        ));
+
+-- T8 - ON DELETE RESTRICT
+-- Attendu : REFUS, le livre 1 est utilisé par des images, actus et personnages
+DELETE FROM livre WHERE id_livre = 1;
