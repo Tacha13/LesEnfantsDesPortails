@@ -27,3 +27,21 @@ insert into apparaitre (livre_id, perso_id) values (7,1);
 insert into apparaitre (livre_id, perso_id) values (2,2);
 insert into apparaitre (livre_id, perso_id) values (1,3);
 insert into apparaitre (livre_id, perso_id) values (3,3);
+
+-- Actualités : 5 cas pour RG3
+-- (1 : tous livres publiés / 2 : un livre futur / 3 : livre non validé
+--  4 : aucun livre / 5 : livres publiés mais actu inactive)
+INSERT INTO actualite (titre_actu, type_actu, texte_actu, date_evenement, lieu_evenement, actu_active) VALUES
+('Lancement',          'sortie',    'Lancement Tome 1',             CURRENT_DATE + INTERVAL 1 MONTH, 'Marseille', 1),
+('Coulisse Tome',      'coulisses', 'Coulisse Tome',                NULL,                            'Aubagne',   1),
+('Salon de la BD',     'salon',     'Présentation de l''éditeur',   CURRENT_DATE + INTERVAL 2 DAY,   'Paris',     1),
+('Salon des éditeurs', 'salon',     'Présentation de l''écrivain',  CURRENT_DATE + INTERVAL 5 DAY,   'Marseille', 1),
+('Coulisse Tome 2',    'sortie',    'Coulisse Tome 2',              NULL,                            'Aubagne',   0);
+
+-- Concerner (livre_id, actu_id)
+INSERT INTO concerner (livre_id, actu_id) VALUES
+(1,1), (7,1),   -- actu 1 : tomes 1 et 7, tous publiés
+(1,2), (3,2),   -- actu 2 : tome 1 publié + tome 3 futur
+(2,3),          -- actu 3 : tome 2 non validé
+                -- actu 4 : aucun livre
+(1,5), (7,5);   -- actu 5 : livres publiés mais actu inactive

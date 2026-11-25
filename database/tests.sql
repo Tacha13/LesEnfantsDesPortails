@@ -30,3 +30,23 @@ WHERE l.id_livre = a.livre_id
   AND l.date_parution <= CURRENT_DATE
   AND l.valid_parution = 1
 GROUP BY p.id_perso;
+
+-- T5 - Contrainte ENUM sur type_actu
+-- Attendu : REFUS ('coulisse' sans s n'est pas dans la liste)
+INSERT INTO actualite (titre_actu, type_actu, texte_actu, actu_active)
+VALUES ('Test ENUM', 'coulisse', 'Test valeur hors liste', 1);
+
+-- T6 - RG3 : actus visibles (active ET aucun livre non publié)
+-- Attendu : actus 1 et 4
+-- (2 : tome 3 futur ; 3 : tome 2 non validé ; 5 : inactive)
+SELECT a.id_actu, a.titre_actu
+FROM actualite a
+WHERE a.actu_active = 1
+  AND a.id_actu NOT IN (
+      SELECT c.actu_id
+      FROM concerner c, livre l
+      WHERE c.livre_id = l.id_livre
+        AND (l.date_parution > CURRENT_DATE
+             OR l.date_parution IS NULL
+             OR l.valid_parution = 0)
+  );
